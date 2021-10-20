@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "session": {
+    "new": true,
+    "sessionId": "amzn1.echo-api.session.xxx",
+    "application": {
+      "applicationId": "amzn1.ask.skill.xxxx"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.xxxx"
+    }
+  },
+  "context": {
+    "Viewports": [
+      {
+        "type": "APL",
+        "id": "main",
+        "shape": "RECTANGLE",
+        "dpi": 213,
+        "presentationType": "STANDARD",
+        "canRotate": false,
+        "configuration": {
+          "current": {
+            "mode": "HUB",
+            "video": {
+              "codecs": [
+                "H_264_42",
+                "H_264_41"
+              ]
+            },
+            "size": {
+              "type": "DISCRETE",
+              "pixelWidth": 1280,
+              "pixelHeight": 800
+            }
+          }
+        }
+      }
+    ],
+    "Viewport": {
+      "experiences": [
+        {
+          "arcMinuteWidth": 346,
+          "arcMinuteHeight": 216,
+          "canRotate": false,
+          "canResize": false
+        }
+      ],
+      "mode": "HUB",
+      "shape": "RECTANGLE",
+      "pixelWidth": 1280,
+      "pixelHeight": 800,
+      "dpi": 213,
+      "currentPixelWidth": 1280,
+      "currentPixelHeight": 800,
+      "touch": [
+        "SINGLE"
+      ],
+      "video": {
+        "codecs": [
+          "H_264_42",
+          "H_264_41"
+        ]
+      }
+    },
+    "Extensions": {
+      "available": {
+        "aplext:backstack:10": {}
+      }
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.xxxx"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.xxxx"
+      },
+      "device": {
+        "deviceId": "amzn1.ask.device.xxxx",
+        "supportedInterfaces": {}
+      },
+      "apiEndpoint": "https://api.fe.amazonalexa.com",
+      "apiAccessToken": ""
+    }
+  },
+  "request": {
+    "type": "LaunchRequest",
+    "requestId": "amzn1.echo-api.request.c6549b99-f51d-4d0c-8f57-676ba06b2824",
+    "locale": "en-US",
+    "timestamp": "2021-10-19T04:53:28Z",
+    "shouldLinkResultBeReturned": false
+  }
+}

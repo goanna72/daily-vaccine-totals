@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  daily-vaccine-totals
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  DailyVaccineTotalByStateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: daily_vaccine_total_by_state/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+
+
+Outputs:
+  DailyVaccineTotalByStateFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt DailyVaccineTotalByStateFunction.Arn
+  DailyVaccineTotalByStateFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt DailyVaccineTotalByStateFunctionRole.Arn
