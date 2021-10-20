@@ -58,7 +58,7 @@ class VaccineIntentHandler(AbstractRequestHandler):
         result = data['Item']
         statename = state_fullname[state_upper]
 
-        speech_text = "The daily vaccine totals for " + statename + " is " + str(result['Total']) + ". " + str(percentage) + "% of the eligible " + state + " population are fully vaccinated"
+        speech_text = "The daily vaccine total for " + statename + " is " + str(result['Total']) + ". " + str(percentage) + "% of the eligible " + state + " population are fully vaccinated"
         handler_input.response_builder.speak(speech_text).set_should_end_session(False)
         return handler_input.response_builder.response
 

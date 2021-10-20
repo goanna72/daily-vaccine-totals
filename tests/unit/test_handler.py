@@ -138,5 +138,5 @@ def alexa_event():
 def test_lambda_handler(alexa_event, mocker):
     # we should really mock the call to dynamodb
     ret = app.lambda_handler(alexa_event, "")
-    assert "The daily vaccine totals for Tasmania" in ret['response']['outputSpeech']['ssml']
+    assert "The daily vaccine total for Tasmania" in ret['response']['outputSpeech']['ssml']
     
