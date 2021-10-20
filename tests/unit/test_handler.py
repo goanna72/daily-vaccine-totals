@@ -2,72 +2,141 @@ import json
 
 import pytest
 
-from hello_world import app
+from daily_vaccine_total_by_state import app
 
 
 @pytest.fixture()
-def apigw_event():
-    """ Generates API GW Event"""
+def alexa_event():
+    """ Generates Alexa Event"""
 
     return {
-        "body": '{ "test": "body"}',
-        "resource": "/{proxy+}",
-        "requestContext": {
-            "resourceId": "123456",
-            "apiId": "1234567890",
-            "resourcePath": "/{proxy+}",
-            "httpMethod": "POST",
-            "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
-            "accountId": "123456789012",
-            "identity": {
-                "apiKey": "",
-                "userArn": "",
-                "cognitoAuthenticationType": "",
-                "caller": "",
-                "userAgent": "Custom User Agent String",
-                "user": "",
-                "cognitoIdentityPoolId": "",
-                "cognitoIdentityId": "",
-                "cognitoAuthenticationProvider": "",
-                "sourceIp": "127.0.0.1",
-                "accountId": "",
-            },
-            "stage": "prod",
+      "version": "1.0",
+      "session": {
+        "new": False,
+        "sessionId": "amzn1.echo-api.session.xxxx",
+        "application": {
+          "applicationId": "amzn1.ask.skill.xxxx"
         },
-        "queryStringParameters": {"foo": "bar"},
-        "headers": {
-            "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
-            "Accept-Language": "en-US,en;q=0.8",
-            "CloudFront-Is-Desktop-Viewer": "true",
-            "CloudFront-Is-SmartTV-Viewer": "false",
-            "CloudFront-Is-Mobile-Viewer": "false",
-            "X-Forwarded-For": "127.0.0.1, 127.0.0.2",
-            "CloudFront-Viewer-Country": "US",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            "Upgrade-Insecure-Requests": "1",
-            "X-Forwarded-Port": "443",
-            "Host": "1234567890.execute-api.us-east-1.amazonaws.com",
-            "X-Forwarded-Proto": "https",
-            "X-Amz-Cf-Id": "aaaaaaaaaae3VYQb9jd-nvCd-de396Uhbp027Y2JvkCPNLmGJHqlaA==",
-            "CloudFront-Is-Tablet-Viewer": "false",
-            "Cache-Control": "max-age=0",
-            "User-Agent": "Custom User Agent String",
-            "CloudFront-Forwarded-Proto": "https",
-            "Accept-Encoding": "gzip, deflate, sdch",
+        "attributes": {},
+        "user": {
+          "userId": "amzn1.ask.account.xxxx"
+        }
+      },
+      "context": {
+        "Viewports": [
+          {
+            "type": "APL",
+            "id": "main",
+            "shape": "RECTANGLE",
+            "dpi": 213,
+            "presentationType": "STANDARD",
+            "canRotate": False,
+            "configuration": {
+              "current": {
+                "mode": "HUB",
+                "video": {
+                  "codecs": [
+                    "H_264_42",
+                    "H_264_41"
+                  ]
+                },
+                "size": {
+                  "type": "DISCRETE",
+                  "pixelWidth": 1280,
+                  "pixelHeight": 800
+                }
+              }
+            }
+          }
+        ],
+        "Viewport": {
+          "experiences": [
+            {
+              "arcMinuteWidth": 346,
+              "arcMinuteHeight": 216,
+              "canRotate": False,
+              "canResize": False
+            }
+          ],
+          "mode": "HUB",
+          "shape": "RECTANGLE",
+          "pixelWidth": 1280,
+          "pixelHeight": 800,
+          "dpi": 213,
+          "currentPixelWidth": 1280,
+          "currentPixelHeight": 800,
+          "touch": [
+            "SINGLE"
+          ],
+          "video": {
+            "codecs": [
+              "H_264_42",
+              "H_264_41"
+            ]
+          }
         },
-        "pathParameters": {"proxy": "/examplepath"},
-        "httpMethod": "POST",
-        "stageVariables": {"baz": "qux"},
-        "path": "/examplepath",
+        "Extensions": {
+          "available": {
+            "aplext:backstack:10": {}
+          }
+        },
+        "System": {
+          "application": {
+            "applicationId": "amzn1.ask.skill.xxx"
+          },
+          "user": {
+            "userId": "amzn1.ask.account.xxxx"
+          },
+          "device": {
+            "deviceId": "amzn1.ask.device.xxxx",
+            "supportedInterfaces": {}
+          },
+          "apiEndpoint": "https://api.fe.amazonalexa.com",
+          "apiAccessToken": ""
+        }
+      },
+      "request": {
+        "type": "IntentRequest",
+        "requestId": "amzn1.echo-api.request.5b8f8478-b1e8-4ea1-96b2-52f404a262db",
+        "locale": "en-US",
+        "timestamp": "2021-10-19T04:57:36Z",
+        "intent": {
+          "name": "VaccineIntent",
+          "confirmationStatus": "NONE",
+          "slots": {
+            "states": {
+              "name": "states",
+              "value": "Tasmania",
+              "resolutions": {
+                "resolutionsPerAuthority": [
+                  {
+                    "authority": "amzn1.er-authority.echo-sdk.amzn1.ask.skill.xxxx.states",
+                    "status": {
+                      "code": "ER_SUCCESS_MATCH"
+                    },
+                    "values": [
+                      {
+                        "value": {
+                          "name": "tasmania",
+                          "id": "TAS"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "confirmationStatus": "NONE",
+              "source": "USER"
+            }
+          }
+        },
+        "dialogState": "COMPLETED"
+      }
     }
 
 
-def test_lambda_handler(apigw_event, mocker):
-
-    ret = app.lambda_handler(apigw_event, "")
-    data = json.loads(ret["body"])
-
-    assert ret["statusCode"] == 200
-    assert "message" in ret["body"]
-    assert data["message"] == "hello world"
-    # assert "location" in data.dict_keys()
+def test_lambda_handler(alexa_event, mocker):
+    # we should really mock the call to dynamodb
+    ret = app.lambda_handler(alexa_event, "")
+    assert "The daily vaccine total for Tasmania" in ret['response']['outputSpeech']['ssml']
+    
