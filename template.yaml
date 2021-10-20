@@ -13,7 +13,20 @@ Resources:
     Properties:
       CodeUri: daily_vaccine_total_by_state/
       Handler: app.lambda_handler
-      Runtime: python3.9
+      Runtime: python3.7
+      Policies:
+      - Statement:
+        - Sid: Dynamo
+          Effect: Allow
+          Action:
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          Resource: "*"
+      Events:
+        Alexa:
+          Type: AlexaSkill
+          Properties:
+            SkillId: amzn1.ask.skill.1893e38b-f912-468e-861b-3972fdb41e71
 
 
 Outputs:
